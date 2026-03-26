@@ -1,0 +1,10 @@
+{
+  "name":"Pedro Pires",
+  "email": "qa_testers@qabrains.com",
+  "phone": "11134711013",
+  "date": "1991-08-03",
+  "foods": ["Pasta", "Pizza", "Burger", "Sandwich"],
+  "color":"Blue",
+  "country":"Brazil",
+  "file":"document.pdf"
+}
