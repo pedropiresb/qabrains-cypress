@@ -3,7 +3,7 @@ import form from '../../fixtures/form'
 //import document from '../../fixtures/document.pdf'
 describe('Registration', () => {
 
-    it.only('Form success', () => {
+    it('Form success', () => {
 
         cy.openPage()
         cy.goTo('Form Submission','Submit')
