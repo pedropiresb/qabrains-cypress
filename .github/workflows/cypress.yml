@@ -23,12 +23,12 @@ jobs:
         with:
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/app/continuous-integration/overview#Boot-your-server
-          # start: npm start
+          start: npm start
           wait-on: 'https://practice.qabrains.com/' # Waits for above
           # Records to Cypress Cloud 
           # https://docs.cypress.io/cloud/get-started/setup
           record: true
-          parallel: true # Runs test in parallel using settings above
+          # parallel: true # Runs test in parallel using settings above
         env:
           # For recording and parallelization you must set your CYPRESS_RECORD_KEY
           # in GitHub repo → Settings → Secrets → Actions
