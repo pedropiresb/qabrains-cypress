@@ -19,7 +19,17 @@ class ProductsPage {
     addProductFavorite(product) {
         cy.contains('div', product)
             .find('button svg')
+                .parent()
                 .click()
+                .should('have.css', 'color', 'rgb(255, 0, 0)')
+    }
+
+     removeProductFavorite(product) {
+        cy.contains('div', product)
+            .find('button svg')
+                .parent()
+                .click()
+                .should('have.css', 'color', 'rgb(34, 34, 34)')
     }
 
     removeProductCart(product) {
@@ -37,6 +47,15 @@ class ProductsPage {
     validateCartNumber(text) {
         cy.get('div.profile span span')
             .should('have.text',text)
+    }
+
+    goToCart() {
+        cy.get('div.profile span[role="button"]')
+            .click()
+        cy.contains('h3', 'Your Cart')
+            .should('be.visible')
+          
+
     }
 
     

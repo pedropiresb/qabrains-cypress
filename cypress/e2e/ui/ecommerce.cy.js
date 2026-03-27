@@ -1,8 +1,11 @@
 import SignInPage from '../../pages/signInPage'
 import user from '../../fixtures/user'
 import ProductsPage from '../../pages/productsPage'
+import CartPage from '../../pages/cartPage'
+import CheckoutPage from '../../pages/checkoutPage'
+import CheckoutOverviewPage from '../../pages/checkoutOverviewPage'
 
-describe('E-commerce', () => {
+describe('Products List validation', () => {
 
     beforeEach(() => {
         cy.openPage()
@@ -42,21 +45,54 @@ describe('E-commerce', () => {
         ProductsPage.validateCartNumber('1')
     })
 
-    it.only('Toast is displayed after adding to favorite', () => {
+    it('Toast is displayed after adding to favorite', () => {
 
         ProductsPage.addProductFavorite('Sample Shoe Name')
         ProductsPage.validateToast('Added to favorites')
 
     })
 
-    it.only('Toast is displayed after removing from favorite', () => {
+    it('Toast is displayed after removing from favorite', () => {
 
         ProductsPage.addProductFavorite('Sample Shoe Name')
         ProductsPage.validateToast('Added to favorites')
-        ProductsPage.addProductFavorite('Sample Shoe Name')
+        ProductsPage.removeProductFavorite('Sample Shoe Name')
         ProductsPage.validateToast('Removed from favorites')
 
     })
+})
+
+describe.only('Checkout Page', () => {
+    beforeEach(() => {
+        cy.openPage()
+        cy.goTo('E-Commerce Site', 'View Test Case')
+
+        cy.contains('a', 'Visit Demo Site')
+            .should('be.visible')
+            .click()
+
+        SignInPage.fillEmail('test@qabrains.com')
+        SignInPage.fillPassword('Password123')
+        SignInPage.clickSignIn()
+    })
+
+    it('Validate checkout', () => {
+
+        ProductsPage.addProductCart('Sample Shoe Name')
+        //ProductsPage.validateCartNumber('1')
+        ProductsPage.addProductCart('Sample Shirt Name')
+        //roductsPage.validateCartNumber('2')
+        ProductsPage.goToCart()
+        CartPage.goToCheckout()
+        CheckoutPage.fillFirstName('Pedro')
+        CheckoutPage.fillLastName('Pires')
+        CheckoutPage.fillZipCode('51021030')
+        CheckoutPage.clickContinue()
+        CheckoutOverviewPage.clickFinish()
+        CheckoutOverviewPage.validateSuccessTitle('Thank you for your order!')
+        CheckoutOverviewPage.validateSuccessDescription('Your order has been dispatched, and will arrive just as fast as the pony can get there!')
+    })
+
 })
 
 
